@@ -1,2 +1,7 @@
 .terraform
 terraform.tfvars
+k8s
+k8s.pub
+terraform.tfstate
+terraform.tfstate.backup
+hosts

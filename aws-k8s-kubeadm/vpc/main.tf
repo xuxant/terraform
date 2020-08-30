@@ -28,7 +28,8 @@ resource "aws_subnet" "private_subnet_one" {
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
-    Name = join(" - ", [lookup(var.PRIVATE_CIDR, "private-1"), data.aws_availability_zones.available.names[0]])
+    Name    = join(" - ", [lookup(var.PRIVATE_CIDR, "private-1"), data.aws_availability_zones.available.names[0]])
+    purpose = "k8s-subnet"
   }
 }
 
@@ -39,7 +40,8 @@ resource "aws_subnet" "private_subnet_two" {
   availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
-    Name = join(" - ", [lookup(var.PRIVATE_CIDR, "private-2"), data.aws_availability_zones.available.names[1]])
+    Name    = join(" - ", [lookup(var.PRIVATE_CIDR, "private-2"), data.aws_availability_zones.available.names[1]])
+    purpose = "k8s-subnet"
   }
 }
 
@@ -50,7 +52,8 @@ resource "aws_subnet" "private_subnet_three" {
   availability_zone = data.aws_availability_zones.available.names[2]
 
   tags = {
-    Name = join(" - ", [lookup(var.PRIVATE_CIDR, "private-3"), data.aws_availability_zones.available.names[2]])
+    Name    = join(" - ", [lookup(var.PRIVATE_CIDR, "private-3"), data.aws_availability_zones.available.names[2]])
+    purpose = "k8s-subnet"
   }
 }
 
@@ -86,7 +89,7 @@ resource "aws_route_table_association" "public" {
 
 # Allocate the Elastic IP for NAT Instance
 resource "aws_eip" "nat_ip" {
-  vpc = aws_vpc.k8s_vpc.id
+  vpc = true
 
   tags = {
     Name = "NATGatewayIP"

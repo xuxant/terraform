@@ -18,8 +18,8 @@ variable "PRIVATE_CIDR" {
   type = map
 
   default = {
-    private-1 = "172.16.2.0/24"
-    private-2 = "172.16.3.0/24"
-    private-3 = "172.16.4.0/24"
+    private-1 = "172.32.2.0/24"
+    private-2 = "172.32.3.0/24"
+    private-3 = "172.32.4.0/24"
   }
 }

@@ -12,6 +12,12 @@ resource "aws_security_group" "bastian_server" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "master_nodes" {
@@ -51,14 +57,6 @@ resource "aws_security_group" "master_nodes" {
     cidr_blocks = [var.VPC_CIDR]
   }
 
-  #   ingress {
-  #     description = "Weave UDP Port"
-  #     from_port   = 6784
-  #     to_port     = 6784
-  #     protocol    = "udp"
-  #     cidr_blocks = [var.VPC_CIDR]
-  #   }
-
   ingress {
     description = "Weave TCP Port"
     from_port   = 6783
@@ -75,30 +73,20 @@ resource "aws_security_group" "master_nodes" {
     cidr_blocks = [var.VPC_CIDR]
   }
 
-  #   ingress {
-  #     description = "Kube Scheduler"
-  #     from_port   = 10251
-  #     to_port     = 10251
-  #     protocol    = "tcp"
-  #     cidr_blocks = [var.VPC_CIDR]
-  #   }
-
   ingress {
     description = "Kubelet API One"
     from_port   = 20255
-    to_port     = 10256
+    to_port     = 20256
     protocol    = "tcp"
     cidr_blocks = [var.VPC_CIDR]
   }
 
-  #   ingress {
-  #     description = "Kubelet API Two"
-  #     from_port   = 20256
-  #     to_port     = 10256
-  #     protocol    = "tcp"
-  #     cidr_blocks = [var.VPC_CIDR]
-  #   }
-
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
 }
 
@@ -143,9 +131,16 @@ resource "aws_security_group" "worker_nodes" {
   ingress {
     description = "Kubelet API One"
     from_port   = 20255
-    to_port     = 10256
+    to_port     = 20256
     protocol    = "tcp"
     cidr_blocks = [var.VPC_CIDR]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
 }
