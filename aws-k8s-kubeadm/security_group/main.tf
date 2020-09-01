@@ -20,6 +20,38 @@ resource "aws_security_group" "bastian_server" {
   }
 }
 
+# Security Group for ingress accepting loadbalancer
+resource "aws_security_group" "loadbalancer" {
+  name        = "ingressSG"
+  description = "Rules for ingress."
+  vpc_id      = var.VPC_ID
+
+  ingress {
+    description = "http for ingress traffic."
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "https for ingress traffic."
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+
 resource "aws_security_group" "master_nodes" {
   name        = "MasterNodeSG"
   description = "Security Group for Master Nodes"

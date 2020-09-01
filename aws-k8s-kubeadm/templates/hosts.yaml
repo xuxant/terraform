@@ -1,10 +1,16 @@
 [master]
-${master-1_address}
-${master-2_address}
-${master-3_address}
+master ansible_host=${master-1_address}
 
+[masters]
+masters-1 ansible_host=master-2_address
+masters-2 ansible_host=master-3_address
+
+[workers]
+worker-1 ansible_host=${worker_node_1}
+worker-2 ansible_host=${worker_node_2}
+worker-3 ansible_host=${worker_node_3}
 
 [all:vars]
-dns = ${internal_lb_dns}
+internal_lb_dns = ${internal_lb_dns}
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 ansible_python_interpreter=/usr/bin/python3

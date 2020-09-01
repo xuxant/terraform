@@ -14,3 +14,8 @@ output "bastionSG" {
   value       = aws_security_group.bastian_server.id
   description = "Security Group for master node."
 }
+
+output "loadbalancerSG" {
+  value       = aws_security_group.loadbalancer.id
+  description = "Security Group for ingress lb."
+}

@@ -7,6 +7,7 @@ variable "private_subnet_2" {}
 variable "private_subnet_3" {}
 variable "public_subnet_id" {}
 variable "AWS_REGION" {}
+variable "loadbalancerSG" {}
 variable "INSTANCE_USERNAME" {
   default = "ubuntu"
 }
