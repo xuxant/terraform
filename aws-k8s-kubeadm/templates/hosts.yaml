@@ -2,8 +2,8 @@
 master ansible_host=${master-1_address}
 
 [masters]
-masters-1 ansible_host=master-2_address
-masters-2 ansible_host=master-3_address
+masters-1 ansible_host=${master-2_address}
+masters-2 ansible_host=${master-3_address}
 
 [workers]
 worker-1 ansible_host=${worker_node_1}
